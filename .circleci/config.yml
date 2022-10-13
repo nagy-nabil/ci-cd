@@ -28,6 +28,6 @@ jobs:
   #   steps:
   #     - checkout
 workflows:
-  install-build:
+  main-workflow:
     jobs:
-      - install-dep
+      - install-build
