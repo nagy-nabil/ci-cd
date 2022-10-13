@@ -20,10 +20,9 @@ jobs:
     docker:
       - image: "cimg/base:stable"
     steps:
-      - run: /
-            npm run frontend:build
-      - run: /
-            npm run backend:build
+      - checkout
+      - run: npm run frontend:build
+      - run: npm run backend:build
 workflows:
   install-workflow:
     jobs:
