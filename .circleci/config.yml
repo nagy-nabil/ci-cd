@@ -5,12 +5,13 @@ orbs:
   aws-cli: circleci/aws-cli@3.1.3
   # different jobs are calles later in the workflows sections
 jobs:
-  install-build:
+  install-build-deploy:
     docker:
       # the base image can run most needed actions with orbs
       - image: "cimg/base:stable"
     steps:
       - node/install
+      - aws-cli/setup
       - checkout
       # install dependencies in both apps
       - run: |
@@ -24,12 +25,11 @@ jobs:
       - run: npm run frontend:build
       - run: npm run backend:build
       - run: npm run frontend:deploy
-  # build:
-  #   docker:
-  #     - image: "cimg/base:stable"
+  # deploy-frontend:
+  #   executor: aws-cli/default
   #   steps:
   #     - checkout
 workflows:
   main-workflow:
     jobs:
-      - install-build
+      - install-build-deploy
